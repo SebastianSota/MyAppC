@@ -15,16 +15,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleMapsApiKey": "AIzaSyDrTVxepAcHObutH144Lnz9xqiwKkegaSI"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDrTVxepAcHObutH144Lnz9xqiwKkegaSI"
+        }
+      },
+      "package": "com.utez.edu.Mercadito5C"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "525e2a0a-d5fd-4748-9949-62c8f0186a07"
+      }
     }
   }
 }

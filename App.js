@@ -1,29 +1,46 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useState } from "react";
-import BottNav from "./screens/bottomtab";
-import Login from "./screens/login";
-import Splash from "./screens/splash";
-
-
-const Stack = createStackNavigator();
-
-
+import { useState } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 App = () => {
+  const [coordinate, setCoordinate] = useState(null);
+
+  const selectPlace = (event) => {
+    setCoordinate(event.nativeEvent.coordinate);
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen name='Login' component={Login}
-          options={{ headerShown: false }} />
-        <Stack.Screen name='Splash' component={Splash}
-          options={{ headerShown: false }} />
-        <Stack.Screen name='BottomTab' component={BottNav}
-          options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.mapStyle}
+        initialRegion={{
+          longitude: -99.2001685947205,
+          latitude: 18.852438123600546,
+          latitudeDelta: 0.003,
+          longitudeDelta: 0.003
+        }}
+        mapType='standard'
+        onLongPress={selectPlace}
+      >
+        {coordinate && (
+          <Marker title='Marcador hecho por el usuario' coordinate={coordinate} />
+        )}
+      </MapView>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  }
+})
 
 
 export default App;
